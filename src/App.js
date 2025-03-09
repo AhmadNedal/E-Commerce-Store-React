@@ -25,11 +25,14 @@ const images = ["back1.png", "back2.png", "back3.jpg", "back4.jpg"];
 
 
 
-var themee = localStorage.getItem("themee") ; 
-if ( themee == null ) { 
-  localStorage.setItem("themee", "llight")
-}  else {
-  if (themee != "llight" ){ 
+  var themee = localStorage.getItem("themee") ; 
+  if ( themee == null ) { 
+    localStorage.setItem("themee", "llight") ; 
+    
+  }
+
+
+  if (localStorage.getItem("themee") != "llight" ){ 
       document.documentElement.style.setProperty("--white", "#000000"); 
     document.documentElement.style.setProperty("--black", "#ffffff"); 
     document.documentElement.style.setProperty("--lessBack", "#3d433dc7"); 
@@ -49,7 +52,6 @@ if ( themee == null ) {
       document.documentElement.style.setProperty("--redd", "#ff0000"); 
     }
   
-}
 
 var array = [
   {
@@ -208,7 +210,9 @@ var array = [
 
 
 ];
-// localStorage.setItem("LocalStore", JSON.stringify(array));
+
+
+// localStorage.setItem("LocalStore", JSON.stringify([...array]));
 
 if (JSON.parse(localStorage.getItem("LocalStore")) == null) {
   localStorage.setItem("LocalStore", JSON.stringify(array));
@@ -219,9 +223,10 @@ if (JSON.parse(localStorage.getItem("LocalStore")) == null) {
 
 var AllCart = JSON.parse(localStorage.getItem("Cart"));
   if ( AllCart == null ) {
-    localStorage.setItem("Cart", []);
-
+    localStorage.setItem("Cart", JSON.stringify([]));
   }
+
+
 
 
 // localStorage.setItem("Cart", JSON.stringify([{
@@ -237,9 +242,8 @@ var AllCart = JSON.parse(localStorage.getItem("Cart"));
 //   },
 //   ]));
 
-if (JSON.parse(localStorage.getItem("Cart")) == null) {
-  localStorage.setItem("Cart", JSON.stringify(0));
-}
+
+
 
 i18n
   .use(initReactI18next)
@@ -274,17 +278,25 @@ function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % images.length);
-      
     }, 3000);
-
     return () => clearInterval(interval);
   }, []);
 
-    
 
-  setInterval(() => {
-     console.log ( "Smaeer " ); 
-  }, 3000);
+  useEffect(()=> {
+
+    if (JSON.parse(localStorage.getItem("LocalStore")) == null) {
+      localStorage.setItem("LocalStore", JSON.stringify(array));
+    } else {
+      array = JSON.parse(localStorage.getItem("LocalStore"));
+    }
+    
+    if (JSON.parse(localStorage.getItem("Cart")) == null ) {
+        localStorage.setItem("Cart", JSON.stringify([]));
+    }
+
+  },[] ); 
+    
 
 
 

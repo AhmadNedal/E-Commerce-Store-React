@@ -10,8 +10,13 @@ export default function Header() {
   const { t } = useTranslation();
 
     // var [CartNumChild,setCartNumChild] = useState([]) ;
-    var [countCard,sss]=useState (JSON.parse(localStorage.getItem("Cart")) ); 
-    console.log ( "countCard = " , countCard ); 
+    
+    
+// localStorage.setItem("Cart", JSON.stringify());
+// localStorage.setItem("NumCart", JSON.stringify(0));
+
+    var [countCard,sss]=useState (JSON.parse(localStorage.getItem("Cart")));     
+
       // useEffect(function(){
       //   setCartNumChild(statee.setCartNum);
       // },[]); 
